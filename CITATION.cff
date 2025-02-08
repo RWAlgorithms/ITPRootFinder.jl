@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: ITPRootFinter.jl
+abstract: Finds a root between a given interval.
+authors:
+  - family-names: Wang
+    given-names: Roy Chih Chung
+    orcid: "https://orcid.org/0000-0002-1391-4536"
+version: 1.0.0
+date-released: "2025-02-08"
+license: GNU-3
+repository-code: "https://github.com/RWAlgorithms/ITPRootFinder.jl"

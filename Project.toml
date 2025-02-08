@@ -1,0 +1,14 @@
+name = "ITPRootFinder"
+uuid = "3aa925f2-72f3-45fa-9558-7758dda5fa92"
+authors = ["Roy Wang <roy.c.c.wang@proton.me>"]
+version = "1.0.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Random", "Test"]

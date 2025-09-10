@@ -13,7 +13,7 @@
     ) where {T<:AbstractFloat}
 Usually the ITP algorithm terminates either `x_tol` or `f_tol` is reached, but `max_iters` is an additional early stopping condition. Please consult the work of *Oliveira and Takahashi, 2020, DOI: 10.1145/3423597* for the interpretation of `k1`, `k2`, `n0`.
 """
-struct Config{T<:AbstractFloat}
+struct Config{T <: AbstractFloat}
     f_tol::T
     x_tol::T
     k1::T
@@ -22,14 +22,14 @@ struct Config{T<:AbstractFloat}
     max_iters::Int # guard.
 
     function Config(
-        ::Type{T};
-        f_tol::T=T(1e-4),
-        x_tol::T=T(1e-6),
-        k1::T=T(0.1),
-        k2::T=T(0.98 * (1 + GOLDEN_RATIO)), # see equation 24.
-        n0::Int=0,
-        max_iters::Int=typemax(Int),
-    ) where {T<:AbstractFloat}
+            ::Type{T};
+            f_tol::T = T(1.0e-4),
+            x_tol::T = T(1.0e-6),
+            k1::T = T(0.1),
+            k2::T = T(0.98 * (1 + GOLDEN_RATIO)), # see equation 24.
+            n0::Int = 0,
+            max_iters::Int = typemax(Int),
+        ) where {T <: AbstractFloat}
 
         k1 > zero(T) || error("The following must be true: k1 > 0")
         one(T) <= k2 < one(T) + GOLDEN_RATIO || error("The following must be true: 1 <= k2 < 1 + golden ratio")
@@ -40,7 +40,6 @@ struct Config{T<:AbstractFloat}
         return new{T}(f_tol, x_tol, k1, k2, n0, max_iters)
     end
 end
-
 
 
 """
@@ -62,16 +61,16 @@ Finds **one** root in `[lb,ub]`, to given `abs(f(x_next)-f(x_current)) < f_tol` 
 Returns `(root_sol, status)`, where `root_sol` is of type `T`, and `status` is a `Bool`.
 - `status==true` if `f_tol` was reached.
 - If `x_tol` was reached before `f_tol`, then `status==false` and `isfinite(root_sol)==true`.
-- If `status==false` and `isfinite(root_sol)==true`, then the assumptions `f_lb * f_ub < 0` and  `lb < ub` are violated. This means `find_root!` cannot find a root.
+- If `status==false` and `isfinite(root_sol)==false`, then the assumptions `f_lb * f_ub < 0` and  `lb < ub` are violated. This means `find_root!` cannot find a root.
 """
 function find_root!(
-    f_buffer, # potentially mutates
-    f!, # a callable
-    f_params,
-    lb::T,
-    ub::T,
-    config::Config{T},
-) where {T<:AbstractFloat}
+        f_buffer, # potentially mutates
+        f!, # a callable
+        f_params,
+        lb::T,
+        ub::T,
+        config::Config{T},
+    ) where {T <: AbstractFloat}
 
     lb < ub || error("lb must be smaller than ub.")
 

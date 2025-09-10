@@ -1,7 +1,7 @@
 name = "ITPRootFinder"
 uuid = "3aa925f2-72f3-45fa-9558-7758dda5fa92"
 authors = ["Roy Wang <roy.c.c.wang@proton.me>"]
-version = "1.0.0"
+version = "1.0.1"
 
 [compat]
 julia = "1"

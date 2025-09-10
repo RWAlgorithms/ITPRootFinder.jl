@@ -44,8 +44,8 @@ end
 
 """
     function find_root!(
-        f_buffer, # potentially mutates
-        f!, # a callable
+        f_buffer,
+        f!,
         f_params,
         lb::T,
         ub::T,
@@ -59,9 +59,9 @@ Finds **one** root in `[lb,ub]`, to given `abs(f(x_next)-f(x_current)) < f_tol` 
 - f! should be a callable of the form `f!(f_buffer, x, f_params)` that returns a scalar of type `T`. `x` is the scalar input, `f_buffer` is potentially mutated when computing `f!`, and `f_params` remains unchanged as one calls `f` with different values for `x`.
 
 Returns `(root_sol, status)`, where `root_sol` is of type `T`, and `status` is a `Bool`.
-- `status==true` if `f_tol` was reached.
-- If `x_tol` was reached before `f_tol`, then `status==false` and `isfinite(root_sol)==true`.
-- If `status==false` and `isfinite(root_sol)==false`, then the assumptions `f_lb * f_ub < 0` and  `lb < ub` are violated. This means `find_root!` cannot find a root.
+- `status == true` if `f_tol` was reached.
+- If `status == false` and `isfinite(root_sol) == true`, then `x_tol` was reached before `f_tol`.
+- If `status == false` and `isfinite(root_sol) == false`, then the assumptions `f_lb * f_ub < 0` and  `lb < ub` are violated. This means `find_root!` cannot find a root.
 """
 function find_root!(
         f_buffer, # potentially mutates
